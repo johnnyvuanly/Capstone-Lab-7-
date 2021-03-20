@@ -31,9 +31,9 @@ def get_exchange_rate(currency):
 
 def request_rates(currency):
     """ Perform API request, return response """
-    params = {'bpi': currency}
-    url = 'https://api.coindesk.com/v1/bpi/currentprice/'
-    return requests.get(url, params=params).json()
+    params = currency
+    url = f'https://api.coindesk.com/v1/bpi/currentprice/{params}.json'
+    return requests.get(url).json()
 
 def extract_rate(rates, currency):
     """ Process the JSON response from the API, extract rate data """
@@ -43,7 +43,7 @@ def convert(amount, exchange_rate):
     """ Convert using the given exchange rate """ 
     return amount * exchange_rate
 
-def display_result(bitcoins, currency, converted):
+def display_result(bitcoins, converted, currency):
     """ Format and display the result """
     print(f'{bitcoins} Bitcoin is equivalent to {converted:.2f} {currency}')
 
